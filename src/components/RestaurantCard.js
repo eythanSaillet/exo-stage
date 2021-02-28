@@ -26,27 +26,25 @@ const Container = styled.div`
 		transform: translate(-50%, -50%);
 		visibility: hidden;
 		.exitCross {
+			position: absolute;
+			right: 0;
 			width: 50px;
 			height: 50px;
 			background: green;
 			cursor: pointer;
 		}
+		.photo {
+			width: 100%;
+			img {
+				width: 100%;
+			}
+		}
 	}
 `
 
-export default function RestaurantCard() {
+export default function RestaurantCard({ name, type, address, imageSource }) {
 	const cardRef = useRef(null)
 	const exitCross = useRef(null)
-
-	// function openCard() {
-	// 	const cardStyle = getComputedStyle(cardRef.current)
-	// 	console.log(cardStyle.current)
-	// 	if (cardStyle.visibility === 'hidden') {
-	// 		cardRef.current.style.visibility = 'visible'
-	// 	} else {
-	// 		cardRef.current.style.visibility = 'hidden'
-	// 	}
-	// }
 
 	return (
 		<Container>
@@ -56,7 +54,7 @@ export default function RestaurantCard() {
 					cardRef.current.style.visibility = 'visible'
 				}}
 			>
-				Bonjour
+				{name}
 			</div>
 			<div className="card" ref={cardRef}>
 				<div
@@ -66,6 +64,15 @@ export default function RestaurantCard() {
 					}}
 					ref={exitCross}
 				></div>
+				<div className="photo">
+					<img src={imageSource} />
+				</div>
+				<div className="infos">
+					<p className="name">{name}</p>
+					<p className="type">{type}</p>
+					<p className="adress">{address}</p>
+				</div>
+				<div className="pictos"></div>
 			</div>
 		</Container>
 	)
